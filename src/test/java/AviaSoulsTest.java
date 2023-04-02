@@ -71,12 +71,12 @@ public class AviaSoulsTest {
         AviaSouls repo = new AviaSouls();
 
         repo.add(ticket5);
-        repo.add(ticket4);
+        repo.add(ticket1);
 
         TicketTimeComparator timeComparator = new TicketTimeComparator();
 
         int expected = 0;
-        int actual = timeComparator.compare(ticket5, ticket4);
+        int actual = timeComparator.compare(ticket5, ticket1);
 
         Assertions.assertEquals(expected, actual);
 
