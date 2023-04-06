@@ -32,7 +32,7 @@ public class AviaSoulsTest {
     }
 
     @Test
-    void search() {
+    void searchWhenFoundSomeTickets() {
 
         AviaSouls repo = new AviaSouls();
         repo.add(ticket1);
@@ -47,6 +47,42 @@ public class AviaSoulsTest {
         Assertions.assertArrayEquals(expected, actual);
 
     }
+
+    @Test
+    void searchWhenFoundOneTicket() {
+
+        AviaSouls repo = new AviaSouls();
+        repo.add(ticket1);
+        repo.add(ticket2);
+        repo.add(ticket3);
+        repo.add(ticket4);
+        repo.add(ticket5);
+
+        Ticket[] expected = {ticket5};
+        Ticket[] actual = repo.search("Valencia", "Torino");
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    void searchWhenFoundZeroTicket() {
+
+        AviaSouls repo = new AviaSouls();
+        repo.add(ticket1);
+        repo.add(ticket2);
+        repo.add(ticket3);
+        repo.add(ticket4);
+        repo.add(ticket5);
+
+        Ticket[] expected = {};
+        Ticket[] actual = repo.search("london", "Torino");
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+
 
     @Test
     public void compareWhenFlightTimeFifthTicketLessThirdTicket() {
@@ -100,7 +136,7 @@ public class AviaSoulsTest {
     }
 
     @Test
-    public void searchAndSortBy() {
+    public void searchAndSortByWhenFoundSomeTickets() {
         AviaSouls repo = new AviaSouls();
         repo.add(ticket1);
         repo.add(ticket2);
@@ -117,4 +153,45 @@ public class AviaSoulsTest {
         Assertions.assertArrayEquals(expected, actual);
 
     }
+
+    @Test
+    public void searchAndSortByWhenFoundOneTicket() {
+        AviaSouls repo = new AviaSouls();
+        repo.add(ticket1);
+        repo.add(ticket2);
+        repo.add(ticket3);
+        repo.add(ticket4);
+        repo.add(ticket5);
+
+        Comparator<Ticket> comp = new TicketTimeComparator();
+
+
+        Ticket[] expected = {ticket5};
+        Ticket[] actual = repo.searchAndSortBy("Valencia", "Torino", comp);
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+    public void searchAndSortByWhenFoundZeroTicket() {
+        AviaSouls repo = new AviaSouls();
+        repo.add(ticket1);
+        repo.add(ticket2);
+        repo.add(ticket3);
+        repo.add(ticket4);
+        repo.add(ticket5);
+
+        Comparator<Ticket> comp = new TicketTimeComparator();
+
+
+        Ticket[] expected = {};
+        Ticket[] actual = repo.searchAndSortBy("Valencia", "Berlin", comp);
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+
+
 }
